@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qcmp"
+version = "0.1.0"
+description = "Modular quantum comparator library (Qiskit) with optional metrics."
+requires-python = ">=3.10"
+dependencies = ["qiskit>=1.0", "qiskit-aer>=0.13"]
+
+[tool.setuptools]
+packages = ["qcmp", "qcmp.comparators", "qcmp.metrics"]
