@@ -86,18 +86,23 @@ Example output:
 
 The repository is organized as follows:
 
-qcmp/
-- comparators/
-  - base.py: abstract comparator interface and metadata definition
-  - lt_orts_tand.py: comparator by Orts et al. (2021)
-- metrics/
-  - basic.py: basic structural metrics
-  - quantum_cost.py: weighted cost models
-- encoding.py: classical to quantum input encoding
-- registry.py: comparator registration system
-- runner.py: execution pipeline and metrics evaluation
-- result.py: RunResult data structure
-- __main__.py: command-line interface entry point
+- `pyproject.toml` — package metadata and dependencies
+- `README.md` — (this file)
+- `qcmp/`
+  - `__init__.py`
+  - `__main__.py` — CLI entrypoint (`python -m qcmp ...`)
+  - `encoding.py` — classical integer → basis-state encoding (X gates)
+  - `registry.py` — comparator registration + lookup
+  - `runner.py` — execution pipeline (prep inputs, transpile, simulate, decode, optional metrics)
+  - `result.py` — `RunResult` dataclass
+  - `comparators/`
+    - `__init__.py` — registers available comparator plugins
+    - `base.py` — comparator interface (`ComparatorMeta`, `BuildOutput`)
+    - `lt_orts_tand.py` — Orts et al. (2021) LT comparator (temporary logical-AND based)
+  - `metrics/`
+    - `__init__.py` — metrics registry + implementations (current repo keeps metrics here)
+- `tests/`
+  - `test_smoke.py` — minimal smoke test
 
 This structure allows new comparators and metrics to be added with minimal changes to the core code.
 
