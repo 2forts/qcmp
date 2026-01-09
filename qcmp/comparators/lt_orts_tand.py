@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Dict
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
+from qiskit.result import marginal_counts
 from qcmp.comparators.base import ComparatorMeta, BuildOutput
 
 # Temporary logical-AND gate as drawn in Fig. 3 of Orts et al. (2021).
@@ -14,18 +15,21 @@ def prepare_t_state(qc: QuantumCircuit, q) -> None:
 def temp_and_compute(qc: QuantumCircuit, x, y, a) -> None:
     qc.cx(x, a)
     qc.cx(y, a)
+    qc.cx(a, x)
+    qc.cx(a, y)
     qc.tdg(x)
     qc.tdg(y)
     qc.t(a)
-    qc.cx(x, a)
-    qc.cx(y, a)
+    qc.cx(a, x)
+    qc.cx(a, y)
     qc.h(a)
     qc.s(a)
 
 def temp_and_uncompute(qc: QuantumCircuit, y, a, cbit) -> None:
     qc.h(a)
     qc.measure(a, cbit)
-    qc.z(y).c_if(cbit, 1)
+    with qc.if_test((cbit, 1)):
+        qc.z(y)
 
 class LT_Orts_TemporaryAND:
     meta = ComparatorMeta(
@@ -59,7 +63,7 @@ class LT_Orts_TemporaryAND:
         # Step 2: temp-AND for a0 b0
         prepare_t_state(qc, A[0])
         temp_and_compute(qc, a[0], b[0], A[0])
-
+        
         # Step 3: forward loop
         for i in range(1,n):
             qc.cx(A[i-1], a[i])
@@ -89,10 +93,18 @@ class LT_Orts_TemporaryAND:
 
         qc.measure(A[n-1], c_out[0])
 
-        def decode_counts(counts: Dict[str,int]) -> Dict[str,int]:
-            bitstring = max(counts, key=counts.get)
-            out_bit = int(bitstring[-1])
-            return {'lt' if sense=='lt' else 'gt': out_bit}
+        def decode_counts(counts):
+            # c_out debe existir como ClassicalRegister(1, "c_out")
+            # y qc es el QuantumCircuit que estás construyendo.
+            idx = qc.clbits.index(c_out[0])          # índice real del bit clásico de salida
+            mc = marginal_counts(counts, indices=[idx])  # nos quedamos SOLO con ese bit
+
+            bit = max(mc, key=mc.get)               # "0" o "1"
+            return {"lt": 1-int(bit)}
 
         regs = {'a':a,'b':b,'A':A,'out_qubit':A[n-1],'c_out':c_out}
         return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
+
+        print("CLASSICAL BITS ORDER:")
+        for i, cb in enumerate(qc.clbits):
+            print(i, cb)

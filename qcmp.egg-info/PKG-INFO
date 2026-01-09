@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: qcmp
+Version: 0.1.0
+Summary: Modular quantum comparator library (Qiskit) with optional metrics.
+Requires-Python: >=3.10
+Requires-Dist: qiskit>=1.0
+Requires-Dist: qiskit-aer>=0.13
