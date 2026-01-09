@@ -82,6 +82,36 @@ Example output:
 
 ---
 
+## Project Structure
+
+The repository is organized as follows:
+
+qcmp/
+- comparators/
+  - base.py: abstract comparator interface and metadata definition
+  - lt_orts_tand.py: comparator by Orts et al. (2021)
+- metrics/
+  - basic.py: basic structural metrics
+  - quantum_cost.py: weighted cost models
+- encoding.py: classical to quantum input encoding
+- registry.py: comparator registration system
+- runner.py: execution pipeline and metrics evaluation
+- result.py: RunResult data structure
+- __main__.py: command-line interface entry point
+
+This structure allows new comparators and metrics to be added with minimal changes to the core code.
+
+---
+
+## Implemented Comparator
+
+lt_orts_tand
+
+Reference:
+F. Orts et al.,
+Optimal fault-tolerant quantum comparators for image binarization,
+The Journal of Supercomputing, 2021.
+
 ## 📄 License
 
 MIT License
