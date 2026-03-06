@@ -89,7 +89,17 @@ Example output:
     "0 010": 260,
     "0 011": 257
   },
-  "metrics": null
+  "metrics": {
+    "gate_counts": {
+      "cx": 41,
+      "h": 3,
+      "if_else": 3,
+      "t": 4,
+      "tdg": 8,
+      "u2": 8,
+      "x": 9
+    },
+    "total_gates": 76
 }
 ```
 
