@@ -14,5 +14,6 @@ qcmp.egg-info/top_level.txt
 qcmp/comparators/__init__.py
 qcmp/comparators/base.py
 qcmp/comparators/lt_orts_tand.py
+qcmp/comparators/lt_yuan_qft.py
 qcmp/metrics/__init__.py
 tests/test_smoke.py

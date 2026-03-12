@@ -122,6 +122,7 @@ The repository is organized as follows:
     - `__init__.py` — registers available comparator plugins
     - `base.py` — comparator interface (`ComparatorMeta`, `BuildOutput`)
     - `lt_orts_tand.py` — Orts et al. (2021) LT comparator (temporary logical-AND based)
+    - `lt_yuan_qft` — Yuan et al. (2023) LT comparator (QFT-based)
   - `metrics/`
     - `__init__.py` — metrics registry + implementations (current repo keeps metrics here)
 - `tests/`
@@ -134,11 +135,16 @@ This structure allows new comparators and metrics to be added with minimal chang
 ## Implemented Comparator
 
 lt_orts_tand
-
 Reference:
-F. Orts et al.,
-Optimal fault-tolerant quantum comparators for image binarization,
-The Journal of Supercomputing, 2021.
+Orts, F., Ortega, G., Cucura, A. C., Filatovas, E., & Garzón, E. M. (2021). 
+Optimal fault-tolerant quantum comparators for image binarization. 
+The Journal of Supercomputing, 77(8), 8433-8444.
+
+lt_yuan_qft
+Reference:
+Yuan, Y., Wang, C., Wang, B., Chen, Z. Y., Dou, M. H., Wu, Y. C., & Guo, G. P. (2023). 
+An improved QFT-based quantum comparator and extended modular arithmetic using one ancilla qubit. 
+New Journal of Physics, 25(10), 103011.
 
 ## 📄 License
 
