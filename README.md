@@ -7,6 +7,7 @@ The library is designed to support **research, benchmarking, and review papers**
 
 ---
 ------
+--------
 ## ✨ Features
 
 - 🔌 **Plugin-based architecture**: each comparator is an independent module
