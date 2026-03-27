@@ -6,7 +6,7 @@ Its purpose is to provide a **unified software framework** to implement, test, a
 The library is designed to support **research, benchmarking, and review papers** in quantum arithmetic and comparison circuits.
 
 ---
-
+------
 ## ✨ Features
 
 - 🔌 **Plugin-based architecture**: each comparator is an independent module
