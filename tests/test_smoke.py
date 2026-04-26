@@ -4,3 +4,11 @@ from qcmp.runner import run
 def test_smoke():
     rr = run('lt_orts_tand', n=2, A=0, B=1, shots=128, seed=1)
     assert 'lt' in rr.decoded
+
+
+def test_xia_qip_truth_tables():
+    for n in range(1, 5):
+        for a in range(2 ** n):
+            for b in range(2 ** n):
+                rr = run('lt_xia_qip', n=n, A=a, B=b, shots=128, seed=1)
+                assert rr.decoded == {'lt': int(a < b)}

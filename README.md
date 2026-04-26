@@ -124,6 +124,7 @@ The repository is organized as follows:
     - `base.py` — comparator interface (`ComparatorMeta`, `BuildOutput`)
     - `lt_orts_tand.py` — Orts et al. (2021) LT comparator (temporary logical-AND based)
     - `lt_xia_cgc` — Xia et al. (2018) LT comparator (CGC gate based)
+    - `lt_xia_qip.py` — Xia et al. (2019) half multi-bit LT comparator
     - `lt_yuan_qft` — Yuan et al. (2023) LT comparator (QFT-based)
   - `metrics/`
     - `__init__.py` — metrics registry + implementations (current repo keeps metrics here)
@@ -145,6 +146,11 @@ lt_xia_cgc:
 Xia, H., Li, H., Zhang, H., Liang, Y., & Xin, J. (2018). 
 An efficient design of reversible multi-bit quantum comparator via only a single ancillary bit. 
 International Journal of Theoretical Physics, 57(12), 3727-3744.
+
+lt_xia_qip:
+Xia, H., Li, H., Zhang, H., Liang, Y., & Xin, J. (2019).
+Novel multi-bit quantum comparators and their application in image binarization.
+Quantum Information Processing, 18, 229.
 
 lt_yuan_qft: 
 Yuan, Y., Wang, C., Wang, B., Chen, Z. Y., Dou, M. H., Wu, Y. C., & Guo, G. P. (2023). 
