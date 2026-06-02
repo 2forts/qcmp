@@ -12,3 +12,15 @@ def test_xia_qip_truth_tables():
             for b in range(2 ** n):
                 rr = run('lt_xia_qip', n=n, A=a, B=b, shots=128, seed=1)
                 assert rr.decoded == {'lt': int(a < b)}
+
+
+def test_oliveira_qbsc_truth_tables():
+    for n in range(2, 5):
+        for a in range(2 ** n):
+            for b in range(2 ** n):
+                rr = run('cmp_oliveira_qbsc', n=n, A=a, B=b, shots=128, seed=1)
+                assert rr.decoded == {
+                    'gt': int(a > b),
+                    'lt': int(a < b),
+                    'eq': int(a == b),
+                }

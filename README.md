@@ -122,6 +122,7 @@ The repository is organized as follows:
   - `comparators/`
     - `__init__.py` — registers available comparator plugins
     - `base.py` — comparator interface (`ComparatorMeta`, `BuildOutput`)
+    - `cmp_oliveira_qbsc.py` — Oliveira and Ramos (2007) full bit-string comparator
     - `lt_orts_tand.py` — Orts et al. (2021) LT comparator (temporary logical-AND based)
     - `lt_xia_cgc` — Xia et al. (2018) LT comparator (CGC gate based)
     - `lt_xia_qip.py` — Xia et al. (2019) half multi-bit LT comparator
@@ -141,6 +142,11 @@ lt_orts_tand:
 Orts, F., Ortega, G., Cucura, A. C., Filatovas, E., & Garzón, E. M. (2021). 
 Optimal fault-tolerant quantum comparators for image binarization. 
 The Journal of Supercomputing, 77(8), 8433-8444.
+
+cmp_oliveira_qbsc:
+Oliveira, D. S., & Ramos, R. V. (2007).
+Quantum bit string comparator: circuits and applications.
+Quantum Computers and Computing, 7(1), 17-26.
 
 lt_xia_cgc: 
 Xia, H., Li, H., Zhang, H., Liang, Y., & Xin, J. (2018). 

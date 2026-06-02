@@ -13,6 +13,7 @@ qcmp.egg-info/requires.txt
 qcmp.egg-info/top_level.txt
 qcmp/comparators/__init__.py
 qcmp/comparators/base.py
+qcmp/comparators/cmp_oliveira_qbsc.py
 qcmp/comparators/lt_orts_tand.py
 qcmp/comparators/lt_xia_cgc.py
 qcmp/comparators/lt_xia_qip.py
