@@ -1,4 +1,5 @@
 import qcmp.comparators  # registers
+from qcmp.registry import get
 from qcmp.runner import run
 
 def test_smoke():
@@ -24,3 +25,20 @@ def test_oliveira_qbsc_truth_tables():
                     'lt': int(a < b),
                     'eq': int(a == b),
                 }
+
+
+def test_donaire_opt1_truth_table():
+    for a in range(4):
+        for b in range(4):
+            rr = run('cmp_donaire_opt1', n=2, A=a, B=b, shots=128, seed=1)
+            assert rr.decoded == {
+                'lt': int(a < b),
+                'eq': int(a == b),
+                'gt': int(a > b),
+            }
+
+
+def test_donaire_opt1_t_count_matches_paper():
+    qc = get('cmp_donaire_opt1').build(2).circuit
+    ops = qc.count_ops()
+    assert ops.get('t', 0) + ops.get('tdg', 0) == 24
