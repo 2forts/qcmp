@@ -1,56 +1,101 @@
 from __future__ import annotations
+
 from typing import Any, Optional
+
 from qiskit import QuantumCircuit
 
+from qcmp.comparators.base import BuildOutput
+from qcmp.metrics.equations import EquationReport, MetricEquation, generate_equations
+from qcmp.metrics.estimator import (
+    NON_GATE_OPS,
+    RESOURCE_METRIC_ALIASES,
+    RESOURCE_METRICS,
+    CircuitResources,
+    MissingGateProfileError,
+    estimate_resources,
+)
+from qcmp.metrics.profiles import (
+    DEFAULT_GATE_PROFILES,
+    GateProfile,
+    GateProfileRegistry,
+    load_gate_profiles,
+)
 
-NON_GATE_OPS = {"measure", "reset", "barrier"}
+
+LEGACY_METRICS = (
+    "depth",
+    "size",
+    "op_counts",
+    "gate_counts",
+    "total_gates",
+    "weighted_cost",
+)
 
 
 def available() -> list[str]:
-    return [
-        "num_qubits",
-        "depth",
-        "size",
-        "op_counts",
-        "gate_counts",
-        "total_gates",
-        "weighted_cost",
-    ]
+    return list(RESOURCE_METRICS + LEGACY_METRICS)
 
 
-def _only_quantum_gates(c: QuantumCircuit) -> dict[str, int]:
-    ops = dict(c.count_ops())
+def _only_quantum_gates(circuit: QuantumCircuit) -> dict[str, int]:
     return {
-        op: int(cnt)
-        for op, cnt in ops.items()
+        op: int(count)
+        for op, count in circuit.count_ops().items()
         if op not in NON_GATE_OPS
     }
 
 
-def compute(c: QuantumCircuit, keys: Optional[list[str]] = None) -> dict[str, Any]:
-    ks = available() if not keys else keys
-    out: dict[str, Any] = {}
+def compute(
+    subject: BuildOutput | QuantumCircuit,
+    keys: Optional[list[str]] = None,
+    *,
+    gate_profiles: GateProfileRegistry | None = None,
+) -> dict[str, Any]:
+    """Compute concrete metrics.
 
-    for k in ks:
-        if k == "num_qubits":
-            out[k] = c.num_qubits
+    Passing ``BuildOutput`` enables all resource metrics. Passing a bare
+    ``QuantumCircuit`` remains supported for the legacy syntactic metrics.
+    """
 
-        elif k == "depth":
-            out[k] = c.depth()
+    selected = available() if not keys else keys
+    accepted = set(available()) | set(RESOURCE_METRIC_ALIASES)
+    unknown = sorted(set(selected) - accepted)
+    if unknown:
+        raise KeyError(", ".join(unknown))
 
-        elif k == "size":
-            out[k] = c.size()
+    built = subject if isinstance(subject, BuildOutput) else None
+    circuit = subject.circuit if built is not None else subject
+    resources = (
+        estimate_resources(built, gate_profiles=gate_profiles).to_dict()
+        if built is not None and any(
+            RESOURCE_METRIC_ALIASES.get(key, key) in RESOURCE_METRICS
+            for key in selected
+        )
+        else None
+    )
 
-        elif k == "op_counts":
-            out[k] = dict(c.count_ops())
-
-        elif k == "gate_counts":
-            out[k] = _only_quantum_gates(c)
-
-        elif k == "total_gates":
-            out[k] = sum(_only_quantum_gates(c).values())
-
-        elif k == "weighted_cost":
+    output: dict[str, Any] = {}
+    for key in selected:
+        canonical_key = RESOURCE_METRIC_ALIASES.get(key, key)
+        if canonical_key in RESOURCE_METRICS:
+            if resources is None:
+                if canonical_key == "num_qubits":
+                    output[key] = circuit.num_qubits
+                    continue
+                raise ValueError(
+                    f"Metric {key!r} requires BuildOutput with ResourceLayout"
+                )
+            output[key] = resources[canonical_key]
+        elif key == "depth":
+            output[key] = circuit.depth()
+        elif key == "size":
+            output[key] = circuit.size()
+        elif key == "op_counts":
+            output[key] = dict(circuit.count_ops())
+        elif key == "gate_counts":
+            output[key] = _only_quantum_gates(circuit)
+        elif key == "total_gates":
+            output[key] = sum(_only_quantum_gates(circuit).values())
+        elif key == "weighted_cost":
             weights = {
                 "x": 1,
                 "h": 1,
@@ -64,12 +109,27 @@ def compute(c: QuantumCircuit, keys: Optional[list[str]] = None) -> dict[str, An
                 "measure": 0,
                 "reset": 0,
             }
-            total = 0
-            for op, cnt in c.count_ops().items():
-                total += weights.get(op, 1) * int(cnt)
-            out[k] = total
+            output[key] = sum(
+                weights.get(op, 1) * int(count)
+                for op, count in circuit.count_ops().items()
+            )
 
-        else:
-            raise KeyError(k)
+    return output
 
-    return out
+
+__all__ = [
+    "CircuitResources",
+    "DEFAULT_GATE_PROFILES",
+    "EquationReport",
+    "GateProfile",
+    "GateProfileRegistry",
+    "MetricEquation",
+    "MissingGateProfileError",
+    "RESOURCE_METRIC_ALIASES",
+    "RESOURCE_METRICS",
+    "available",
+    "compute",
+    "estimate_resources",
+    "generate_equations",
+    "load_gate_profiles",
+]
