@@ -19,4 +19,8 @@ qcmp/comparators/lt_xia_cgc.py
 qcmp/comparators/lt_xia_qip.py
 qcmp/comparators/lt_yuan_qft.py
 qcmp/metrics/__init__.py
+qcmp/metrics/equations.py
+qcmp/metrics/estimator.py
+qcmp/metrics/profiles.py
+tests/test_metrics.py
 tests/test_smoke.py

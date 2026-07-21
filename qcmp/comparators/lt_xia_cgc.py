@@ -3,7 +3,7 @@ from __future__ import annotations
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.result import marginal_counts
 
-from qcmp.comparators.base import ComparatorMeta, BuildOutput
+from qcmp.comparators.base import ComparatorMeta, BuildOutput, ResourceLayout
 
 
 def cgc(qc: QuantumCircuit, c, a, b) -> None:
@@ -131,4 +131,15 @@ class LT_XIA_CGC:
             "c_out": c_out,
         }
 
-        return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
+        resources = ResourceLayout(
+            operand_registers=("a", "b"),
+            solution_qubits=(x1[0],),
+            restored_zero_qubits=(c0[0],),
+        )
+
+        return BuildOutput(
+            circuit=qc,
+            regs=regs,
+            decode_counts=decode_counts,
+            resources=resources,
+        )

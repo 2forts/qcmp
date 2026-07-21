@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import Dict
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.result import marginal_counts
-from qcmp.comparators.base import ComparatorMeta, BuildOutput
+from qcmp.comparators.base import ComparatorMeta, BuildOutput, ResourceLayout
 
 # Temporary logical-AND gate as drawn in Fig. 3 of Orts et al. (2021).
 # Compute uses 4 T/Tdg gates; uncompute uses measurement + classically-controlled Z.
@@ -103,8 +103,13 @@ class LT_Orts_TemporaryAND:
             return {"lt": 1-int(bit)}
 
         regs = {'a':a,'b':b,'A':A,'out_qubit':A[n-1],'c_out':c_out}
-        return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
-
-        print("CLASSICAL BITS ORDER:")
-        for i, cb in enumerate(qc.clbits):
-            print(i, cb)
+        resources = ResourceLayout(
+            operand_registers=("a", "b"),
+            solution_qubits=(A[n - 1],),
+        )
+        return BuildOutput(
+            circuit=qc,
+            regs=regs,
+            decode_counts=decode_counts,
+            resources=resources,
+        )

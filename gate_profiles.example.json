@@ -1,0 +1,9 @@
+{
+  "ccx/3": {
+    "quantum_cost": 5,
+    "delay": 5,
+    "t_count": 7,
+    "t_depth": 3,
+    "description": "Replace these values with the Toffoli decomposition used in your experiment."
+  }
+}

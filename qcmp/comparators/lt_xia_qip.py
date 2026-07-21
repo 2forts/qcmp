@@ -3,7 +3,7 @@ from __future__ import annotations
 from qiskit import ClassicalRegister, QuantumCircuit, QuantumRegister
 from qiskit.result import marginal_counts
 
-from qcmp.comparators.base import BuildOutput, ComparatorMeta
+from qcmp.comparators.base import BuildOutput, ComparatorMeta, ResourceLayout
 
 
 def _open_ccx(qc: QuantumCircuit, c_closed, c_open, target) -> None:
@@ -165,4 +165,15 @@ class LT_Xia_QIP_Half:
             "c_out": c_out,
         }
 
-        return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
+        resources = ResourceLayout(
+            operand_registers=("a", "b"),
+            solution_qubits=(out[0],),
+            restored_zero_qubits=(aux[0],),
+        )
+
+        return BuildOutput(
+            circuit=qc,
+            regs=regs,
+            decode_counts=decode_counts,
+            resources=resources,
+        )

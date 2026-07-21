@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from qiskit import ClassicalRegister, QuantumCircuit, QuantumRegister
 
-from qcmp.comparators.base import BuildOutput, ComparatorMeta
+from qcmp.comparators.base import BuildOutput, ComparatorMeta, ResourceLayout
 
 
 def uc_instruction():
@@ -105,4 +105,13 @@ class CMP_Oliveira_QBSC:
             "c_out": c_out,
         }
 
-        return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
+        resources = ResourceLayout(
+            operand_registers=("a", "b"),
+            solution_qubits=(z1[0], z2[0]),
+        )
+        return BuildOutput(
+            circuit=qc,
+            regs=regs,
+            decode_counts=decode_counts,
+            resources=resources,
+        )

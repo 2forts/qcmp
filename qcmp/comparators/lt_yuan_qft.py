@@ -5,7 +5,7 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit.library import QFT
 from qiskit.result import marginal_counts
 
-from qcmp.comparators.base import ComparatorMeta, BuildOutput
+from qcmp.comparators.base import ComparatorMeta, BuildOutput, ResourceLayout
 
 
 def apply_qft(qc: QuantumCircuit, qubits) -> None:
@@ -121,4 +121,14 @@ class LT_Yuan_QFT:
             "c_out": c_out,
         }
 
-        return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
+        resources = ResourceLayout(
+            operand_registers=("a", "b"),
+            solution_qubits=(anc[0],),
+        )
+
+        return BuildOutput(
+            circuit=qc,
+            regs=regs,
+            decode_counts=decode_counts,
+            resources=resources,
+        )

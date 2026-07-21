@@ -19,6 +19,7 @@ def run(
     optimization_level: int = 1,
     compute_metrics: bool = False,
     metric_keys: Optional[list[str]] = None,
+    gate_profiles: Any = None,
     **build_kwargs: Any,
 ) -> RunResult:
     comp = get(key)
@@ -54,7 +55,7 @@ def run(
     metrics = None
     if compute_metrics:
         from qcmp.metrics import compute  # lazy import (optional module usage)
-        metrics = compute(tqc, keys=metric_keys)
+        metrics = compute(built, keys=metric_keys, gate_profiles=gate_profiles)
 
     return RunResult(
         key=key,
