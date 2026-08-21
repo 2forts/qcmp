@@ -24,3 +24,14 @@ def test_oliveira_qbsc_truth_tables():
                     'lt': int(a < b),
                     'eq': int(a == b),
                 }
+
+
+def test_maity_qcc_truth_table():
+    for a in range(4):
+        for b in range(4):
+            rr = run('cmp_maity_qcc', n=2, A=a, B=b, shots=128, seed=1)
+            assert rr.decoded == {
+                'lt': int(a < b),
+                'eq': int(a == b),
+                'gt': int(a > b),
+            }
