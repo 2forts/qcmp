@@ -24,3 +24,13 @@ def test_oliveira_qbsc_truth_tables():
                     'lt': int(a < b),
                     'eq': int(a == b),
                 }
+
+
+def test_biswal_fault_tolerant_truth_table():
+    for a, b in ((0, 0), (0, 15), (15, 0), (15, 15), (8, 7), (7, 8)):
+        rr = run('cmp_biswal_fault_tolerant', n=4, A=a, B=b, shots=1, seed=1)
+        assert rr.decoded == {
+            'gt': int(a > b),
+            'lt': int(a < b),
+            'eq': int(a == b),
+        }
