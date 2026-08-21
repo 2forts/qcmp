@@ -24,3 +24,15 @@ def test_oliveira_qbsc_truth_tables():
                     'lt': int(a < b),
                     'eq': int(a == b),
                 }
+
+
+def test_morrison_rc_tree_truth_tables():
+    for n in range(1, 5):
+        for a in range(2 ** n):
+            for b in range(2 ** n):
+                rr = run('cmp_morrison_rc_tree', n=n, A=a, B=b, shots=128, seed=1)
+                assert rr.decoded == {
+                    'lt': int(a < b),
+                    'eq': int(a == b),
+                    'gt': int(a > b),
+                }
