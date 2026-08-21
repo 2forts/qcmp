@@ -24,3 +24,23 @@ def test_oliveira_qbsc_truth_tables():
                     'lt': int(a < b),
                     'eq': int(a == b),
                 }
+
+
+def test_phaneendra_prefix_truth_tables():
+    for n in range(1, 4):
+        for a in range(2 ** n):
+            for b in range(2 ** n):
+                rr = run('cmp_phaneendra_prefix', n=n, A=a, B=b, shots=1, seed=1)
+                assert rr.decoded == {
+                    'gt': int(a > b),
+                    'lt': int(a < b),
+                    'eq': int(a == b),
+                }
+
+    for a, b in ((0, 0), (0, 15), (15, 0), (15, 15), (8, 7), (7, 8)):
+        rr = run('cmp_phaneendra_prefix', n=4, A=a, B=b, shots=1, seed=1)
+        assert rr.decoded == {
+            'gt': int(a > b),
+            'lt': int(a < b),
+            'eq': int(a == b),
+        }
