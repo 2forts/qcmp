@@ -24,3 +24,18 @@ def test_oliveira_qbsc_truth_tables():
                     'lt': int(a < b),
                     'eq': int(a == b),
                 }
+
+
+def test_caraiman_threshold_oracle_truth_tables():
+    for n in range(2, 5):
+        for threshold in range(2 ** n):
+            for color in range(2 ** n):
+                rr = run(
+                    'ge_caraiman_threshold_oracle',
+                    n=n,
+                    A=threshold,
+                    B=color,
+                    shots=128,
+                    seed=1,
+                )
+                assert rr.decoded == {'ge': int(color >= threshold)}
