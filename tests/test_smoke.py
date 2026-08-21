@@ -24,3 +24,15 @@ def test_oliveira_qbsc_truth_tables():
                     'lt': int(a < b),
                     'eq': int(a == b),
                 }
+
+
+def test_zhou_zrqc_truth_tables():
+    for n in range(1, 4):
+        for a in range(2 ** n):
+            for b in range(2 ** n):
+                rr = run('cmp_zhou_zrqc', n=n, A=a, B=b, shots=1, seed=1)
+                assert rr.decoded == {
+                    'gt': int(a > b),
+                    'lt': int(a < b),
+                    'eq': int(a == b),
+                }
