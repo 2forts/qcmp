@@ -327,6 +327,11 @@ Xia, H., Li, H., Zhang, H., Liang, Y., & Xin, J. (2019).
 Novel multi-bit quantum comparators and their application in image binarization.
 Quantum Information Processing, 18, 229.
 
+lt_yuan_adaptive: 
+Yuan, S., Zhao, W., Gao, S., Xia, S., Hang, B., & Qu, H. (2022). 
+An adaptive threshold-based quantum image segmentation algorithm and its simulation: S. Yuan et al. 
+Quantum Information Processing, 21(10), 359.
+
 lt_yuan_qft: 
 Yuan, Y., Wang, C., Wang, B., Chen, Z. Y., Dou, M. H., Wu, Y. C., & Guo, G. P. (2023). 
 An improved QFT-based quantum comparator and extended modular arithmetic using one ancilla qubit. 
