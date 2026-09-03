@@ -312,6 +312,11 @@ Orts, F., Ortega, G., Cucura, A. C., Filatovas, E., & Garzón, E. M. (2021).
 Optimal fault-tolerant quantum comparators for image binarization. 
 The Journal of Supercomputing, 77(8), 8433-8444.
 
+cmp_ganapathy_toffoli_adapted
+Ganapathy, V., Sasikumar, S., Mariselvam, A. K., & VM, S. K. (2025). 
+Design and Analysis of Quantum Comparator Circuits for Constrained Optimization Problem.
+Preprint (10.21203/rs.3.rs-7733902/v1)
+
 cmp_kumar_tree_adapted:
 Kumar, A. S., Ramya, A., Siddhesh, U., Meera, N. Y., Kandimalla, T., & Abhishek, P. (2024, August). A Comparator Tree Design with Optimized Quantum Cost Using Reversible Logic Techniques. In 2024 International Conference on Intelligent Algorithms for Computational Intelligence Systems (IACIS) (pp. 1-6). IEEE.
 
