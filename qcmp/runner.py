@@ -8,6 +8,37 @@ from qcmp.encoding import load_int
 from qcmp.result import RunResult
 
 
+def _simulation_backend(
+    num_qubits: int,
+    *,
+    seed: int,
+    simulation_method: str,
+    statevector_qubit_limit: int,
+) -> AerSimulator:
+    """Choose a simulator before transpilation validates the target width.
+
+    Aer 'automatic' advertises a dense-state width derived from host memory.
+    Large comparator circuits may be cheap in MPS but exceed that width. In
+    automatic mode, prefer MPS above the smaller of the advertised width and
+    a conservative dense-state limit (24 qubits = 256 MiB for amplitudes alone).
+    MPS can still be expensive for highly entangled inputs; callers can select
+    an explicit method. Never enlarge a dense simulator's advertised width.
+    """
+    if statevector_qubit_limit < 1:
+        raise ValueError("statevector_qubit_limit must be >= 1")
+    backend = AerSimulator(seed_simulator=seed, method=simulation_method)
+    if simulation_method == "automatic":
+        dense_limit = min(statevector_qubit_limit, backend.num_qubits)
+        if num_qubits > dense_limit:
+            backend = AerSimulator(seed_simulator=seed, method="matrix_product_state")
+
+    if backend.options.method == "matrix_product_state" and num_qubits > backend.num_qubits:
+        # Aer normally advertises 63 MPS qubits. This updates the transpiler
+        # target, not a dense allocation or the state's bond dimension.
+        backend.set_max_qubits(num_qubits)
+    return backend
+
+
 def run(
     key: str,
     n: int,
@@ -20,6 +51,8 @@ def run(
     compute_metrics: bool = False,
     metric_keys: Optional[list[str]] = None,
     gate_profiles: Any = None,
+    simulation_method: str = "automatic",
+    statevector_qubit_limit: int = 24,
     **build_kwargs: Any,
 ) -> RunResult:
     comp = get(key)
@@ -36,7 +69,12 @@ def run(
 
     qc_prepared = prefix.compose(qc)
 
-    backend = AerSimulator(seed_simulator=seed)
+    backend = _simulation_backend(
+        qc_prepared.num_qubits,
+        seed=seed,
+        simulation_method=simulation_method,
+        statevector_qubit_limit=statevector_qubit_limit,
+    )
     tqc = transpile(
         qc_prepared,
         backend=backend,

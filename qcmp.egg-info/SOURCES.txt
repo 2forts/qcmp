@@ -13,6 +13,7 @@ qcmp.egg-info/requires.txt
 qcmp.egg-info/top_level.txt
 qcmp/comparators/__init__.py
 qcmp/comparators/base.py
+qcmp/comparators/cmp_kumar_tree_adapted.py
 qcmp/comparators/cmp_oliveira_qbsc.py
 qcmp/comparators/lt_orts_tand.py
 qcmp/comparators/lt_xia_cgc.py
@@ -23,5 +24,6 @@ qcmp/metrics/__init__.py
 qcmp/metrics/equations.py
 qcmp/metrics/estimator.py
 qcmp/metrics/profiles.py
+tests/test_kumar_integration.py
 tests/test_metrics.py
 tests/test_smoke.py
