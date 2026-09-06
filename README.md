@@ -131,6 +131,16 @@ The output includes a `metrics` object:
 
 The exact values depend on the comparator and on the gate profiles being used.
 
+NOTE: There are some comparators that accept input only through qubits, while the other input is implemented directly through the circuit using quantum gates (these are therefore constant inputs). These comparators can be invoked in a similar way to normal comparators, simply by specifying the values of A and B. The software will handle the implementation of both operators as appropriate. However, you can explicitly specify the constant value as follows:
+
+```bash
+python -m qcmp equations \
+  --cmp lt_orts_constant_tand \
+  --build-kwargs '{"b_value": 7}'
+```
+
+It is essential to understand that, in this type of comparison tool, the metrics DO depend on the constant operator's binary pattern.
+
 ### Generate metric equations
 
 `qcmp` can evaluate a comparator for several values of `N` and infer symbolic equations:
@@ -311,6 +321,11 @@ lt_orts_tand:
 Orts, F., Ortega, G., Cucura, A. C., Filatovas, E., & Garzón, E. M. (2021). 
 Optimal fault-tolerant quantum comparators for image binarization. 
 The Journal of Supercomputing, 77(8), 8433-8444.
+
+lt_orts_constant_tand
+Orts, F., Filatovas, E., Garzón, E. M., & Ortega, G. (2023). 
+A quantum circuit to generate random numbers within a specific interval. 
+EPJ Quantum Technology, 10(1), 17.
 
 cmp_ganapathy_toffoli_adapted
 Ganapathy, V., Sasikumar, S., Mariselvam, A. K., & VM, S. K. (2025). 

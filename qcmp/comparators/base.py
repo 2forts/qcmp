@@ -16,6 +16,10 @@ class ComparatorMeta:
     outputs: tuple[str, ...]
     ancilla_mode: str
     notes: str = ""
+    # Operands whose values are compiled into the circuit instead of loaded
+    # into quantum registers. The runner maps "a"/"b" to a_value/b_value.
+    # Empty by default, so existing comparator plugins keep their behaviour.
+    constant_operands: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)

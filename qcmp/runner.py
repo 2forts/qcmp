@@ -8,6 +8,9 @@ from qcmp.encoding import load_int
 from qcmp.result import RunResult
 
 
+_CLI_OPERANDS = ("a", "b")
+
+
 def _simulation_backend(
     num_qubits: int,
     *,
@@ -56,7 +59,28 @@ def run(
     **build_kwargs: Any,
 ) -> RunResult:
     comp = get(key)
-    built = comp.build(n, **build_kwargs)
+    input_values = {"a": A, "b": B}
+    constant_operands = tuple(getattr(comp.meta, "constant_operands", ()))
+    if len(set(constant_operands)) != len(constant_operands):
+        raise ValueError(f"Comparator {key!r} declares duplicate constant operands")
+    unknown_constants = sorted(set(constant_operands) - set(_CLI_OPERANDS))
+    if unknown_constants:
+        raise ValueError(
+            f"Comparator {key!r} declares unsupported constant operands: "
+            f"{', '.join(unknown_constants)}"
+        )
+
+    effective_build_kwargs = dict(build_kwargs)
+    for operand in constant_operands:
+        parameter = f"{operand}_value"
+        if parameter in effective_build_kwargs:
+            raise TypeError(
+                f"{parameter} is supplied automatically from the runner's "
+                f"--{operand.upper()} input"
+            )
+        effective_build_kwargs[parameter] = input_values[operand]
+
+    built = comp.build(n, **effective_build_kwargs)
 
     qc = built.circuit
     regs = built.regs
@@ -64,8 +88,14 @@ def run(
     # --- IMPORTANT: prepare inputs BEFORE the comparator circuit ---
     # We build a prefix circuit with the same registers, then compose it in front.
     prefix = QuantumCircuit(*qc.qregs, *qc.cregs, name="prep")
-    load_int(prefix, regs["a"], A)
-    load_int(prefix, regs["b"], B)
+    for operand in _CLI_OPERANDS:
+        if operand in constant_operands:
+            continue
+        if operand not in regs:
+            raise KeyError(
+                f"Comparator {key!r} has no register for runtime operand {operand!r}"
+            )
+        load_int(prefix, regs[operand], input_values[operand])
 
     qc_prepared = prefix.compose(qc)
 

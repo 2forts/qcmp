@@ -18,6 +18,16 @@ def _csv(value: str) -> list[str]:
     return [item.strip() for item in value.split(",") if item.strip()]
 
 
+def _json_object(value: str) -> dict:
+    try:
+        result = json.loads(value)
+    except json.JSONDecodeError as exc:
+        raise argparse.ArgumentTypeError(f"invalid JSON: {exc.msg}") from exc
+    if not isinstance(result, dict):
+        raise argparse.ArgumentTypeError("value must be a JSON object")
+    return result
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="qcmp")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -43,6 +53,10 @@ def main() -> None:
     equations_parser.add_argument("--sample-max", type=int, default=12)
     equations_parser.add_argument("--max-degree", type=int, default=4)
     equations_parser.add_argument("--gate-profiles", default="")
+    equations_parser.add_argument(
+        "--build-kwargs", type=_json_object, default=None,
+        help='comparator build options as JSON, e.g. {"b_value": 7}',
+    )
 
     args = parser.parse_args()
 
@@ -102,6 +116,7 @@ def main() -> None:
             sample_max=args.sample_max,
             max_degree=args.max_degree,
             gate_profiles=profiles,
+            build_kwargs=args.build_kwargs,
         )
         print(json.dumps(report.to_dict(), indent=2, sort_keys=True))
 
