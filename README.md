@@ -327,13 +327,25 @@ Orts, F., Filatovas, E., Garzón, E. M., & Ortega, G. (2023).
 A quantum circuit to generate random numbers within a specific interval. 
 EPJ Quantum Technology, 10(1), 17.
 
+gt_orts_constant_toffoli
+Orts, F., & Gil-Merino, R. (2025). 
+A Framework for Quantum Circuit Optimization: Comparators as a Case Study. 
+IEEE Transactions on Computers, 75(2), 706-719.
+
+gt_donaire_constant_tand
+Donaire, L. M., Ortega, G., Garzón, E. M., Orts, F., Paulavičius, R., & Filatovas, E. (2024, September). 
+Halving the Number of Qubits of Quantum Comparators. 
+In International Conference on Parallel Processing and Applied Mathematics (pp. 290-300).
+
 cmp_ganapathy_toffoli_adapted
 Ganapathy, V., Sasikumar, S., Mariselvam, A. K., & VM, S. K. (2025). 
 Design and Analysis of Quantum Comparator Circuits for Constrained Optimization Problem.
 Preprint (10.21203/rs.3.rs-7733902/v1)
 
 cmp_kumar_tree_adapted:
-Kumar, A. S., Ramya, A., Siddhesh, U., Meera, N. Y., Kandimalla, T., & Abhishek, P. (2024, August). A Comparator Tree Design with Optimized Quantum Cost Using Reversible Logic Techniques. In 2024 International Conference on Intelligent Algorithms for Computational Intelligence Systems (IACIS) (pp. 1-6). IEEE.
+Kumar, A. S., Ramya, A., Siddhesh, U., Meera, N. Y., Kandimalla, T., & Abhishek, P. (2024, August). 
+A Comparator Tree Design with Optimized Quantum Cost Using Reversible Logic Techniques. 
+In 2024 International Conference on Intelligent Algorithms for Computational Intelligence Systems (IACIS) (pp. 1-6). IEEE.
 
 cmp_oliveira_qbsc:
 Oliveira, D. S., & Ramos, R. V. (2007).

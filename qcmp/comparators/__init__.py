@@ -9,6 +9,8 @@ from qcmp.comparators.lt_yuan_adaptive import LT_Yuan_Adaptive
 from qcmp.comparators.cmp_kumar_tree_adapted import CMP_Kumar_Tree_Adapted
 from qcmp.comparators.cmp_ganapathy_toffoli_adapted import CMP_Ganapathy_Toffoli_Adapted
 from qcmp.comparators.lt_orts_constant_tand import LT_Orts_Constant_TAND
+from qcmp.comparators.gt_orts_constant_toffoli import GT_Orts_Constant_Toffoli
+from qcmp.comparators.gt_donaire_constant_tand import GT_Donaire_Constant_TAND
 
 register(LT_Orts_TemporaryAND())
 register(LT_Yuan_QFT())
@@ -19,3 +21,5 @@ register(LT_Yuan_Adaptive())
 register(CMP_Kumar_Tree_Adapted())
 register(CMP_Ganapathy_Toffoli_Adapted())
 register(LT_Orts_Constant_TAND())
+register(GT_Orts_Constant_Toffoli())
+register(GT_Donaire_Constant_TAND())

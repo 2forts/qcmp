@@ -50,15 +50,6 @@ This module emits the internals of each block. Therefore qcmp sees additional
 H/S/CX gates, plus N-1 measurements and resets. The paper's T-count remains
 directly testable. No hardware routing or SWAP cost is included.
 
-INSTALLATION
-------------
-Register once in qcmp/comparators/__init__.py:
-  from qcmp.comparators.lt_orts_constant_tand import LT_Orts_Constant_TAND
-  register(LT_Orts_Constant_TAND())
-
-Then the unchanged CLI meaning is preserved: --A is loaded into the quantum
-register and --B is compiled into X/I choices by the runner/library extension.
-  python -m qcmp run --cmp lt_orts_constant_tand --n 4 --A 3 --B 7
 """
 
 from __future__ import annotations
