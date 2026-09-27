@@ -277,6 +277,79 @@ To obtain physical Clifford+T metrics for these circuits, the rotations must fir
 
 ---
 
+## Runtime Benchmarking
+
+The `benchmark` command measures every registered comparator over an inclusive
+range of input widths. Each point is warmed up and then measured repeatedly;
+the report uses medians and inclusive quartiles to reduce sensitivity to
+short-lived system load.
+
+```bash
+python -m qcmp benchmark \
+  --n-min 2 \
+  --n-max 10 \
+  --repeats 7 \
+  --warmups 2 \
+  --shots 1024
+```
+
+Four stages are recorded during every repetition:
+
+| Stage | Included work |
+|---|---|
+| `build` | Construction of the comparator circuit. |
+| `transpile` | Qiskit transpilation for the selected Aer backend. |
+| `simulate` | Job submission, simulation, result retrieval, and count extraction. |
+| `total` | The complete pipeline, including input preparation, backend selection, and result decoding. |
+
+Use `--stage` to choose the value used for ranking and display. A ranking score
+is the mean of the median time at each completed input width. By default, a
+comparator must complete the entire selected range to be ranked.
+
+```bash
+python -m qcmp benchmark \
+  --n-min 2 --n-max 12 \
+  --stage transpile \
+  --top 5
+```
+
+`--allow-partial` permits ranking a comparator that supports only part of the
+range. The coverage column always reports how many requested sizes completed.
+Use `--max-qubits` to skip circuits above a chosen width without aborting the
+remaining benchmark.
+
+The default table can be replaced by JSON or CSV and written to a file:
+
+```bash
+python -m qcmp benchmark \
+  --n-min 2 --n-max 10 \
+  --format json \
+  --output benchmark.json
+```
+
+Graphical output plots the per-size medians and their interquartile bands. It
+uses the same stage, top selection, and partial-coverage policy as the textual
+report.
+
+```bash
+python -m qcmp benchmark \
+  --n-min 2 --n-max 10 \
+  --stage total \
+  --top 5 \
+  --plot benchmark.png \
+  --log-y
+```
+
+Use `--cmp key1,key2` to benchmark only selected implementations. The default
+inputs are `A=0` and `B=1`; they can be changed with `--A` and `--B`.
+
+Runtime results depend on the host, Qiskit and Aer versions, simulation method,
+optimization level, shot count, and current system load. Record these options
+with published measurements and avoid treating wall-clock timings as
+hardware-independent complexity measures.
+
+---
+
 ## Run a comparator
 
 ```bash
