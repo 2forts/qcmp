@@ -372,6 +372,11 @@ Yuan, Y., Wang, C., Wang, B., Chen, Z. Y., Dou, M. H., Wu, Y. C., & Guo, G. P. (
 An improved QFT-based quantum comparator and extended modular arithmetic using one ancilla qubit. 
 New Journal of Physics, 25(10), 103011.
 
+lt_berti_qpc
+Berti, A., Poggiali, A. (2026)
+A Quantum Phase-based Comparator
+Preprint (arXiv:2609.25262)
+
 ## 📄 License
 
 MIT License
