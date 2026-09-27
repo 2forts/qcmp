@@ -2,6 +2,7 @@ README.md
 pyproject.toml
 qcmp/__init__.py
 qcmp/__main__.py
+qcmp/benchmark.py
 qcmp/encoding.py
 qcmp/registry.py
 qcmp/result.py
@@ -16,6 +17,9 @@ qcmp/comparators/base.py
 qcmp/comparators/cmp_ganapathy_toffoli_adapted.py
 qcmp/comparators/cmp_kumar_tree_adapted.py
 qcmp/comparators/cmp_oliveira_qbsc.py
+qcmp/comparators/gt_donaire_constant_tand.py
+qcmp/comparators/gt_orts_constant_toffoli.py
+qcmp/comparators/lt_berti_qpc.py
 qcmp/comparators/lt_orts_constant_tand.py
 qcmp/comparators/lt_orts_tand.py
 qcmp/comparators/lt_xia_cgc.py
@@ -26,6 +30,7 @@ qcmp/metrics/__init__.py
 qcmp/metrics/equations.py
 qcmp/metrics/estimator.py
 qcmp/metrics/profiles.py
+tests/test_benchmark.py
 tests/test_ganapathy_toffoli_adapted.py
 tests/test_kumar_integration.py
 tests/test_metrics.py
