@@ -24,6 +24,7 @@ from qcmp.comparators.cmp_subramanian_tr_half import CMP_Subramanian_TR_Half
 from qcmp.comparators.gt_xia_optimized import GT_Xia_Optimized
 from qcmp.comparators.cmp_rangaraju_serial import CMP_Rangaraju_Serial
 from qcmp.comparators.cmp_phaneendra_prefix import CMP_Phaneendra_Prefix
+from qcmp.comparators.cmp_zhou_zrqc import CMP_Zhou_ZRQC
 
 register(LT_Orts_TemporaryAND())
 register(LT_Yuan_QFT())
@@ -49,3 +50,4 @@ register(CMP_Subramanian_TR_Half())
 register(GT_Xia_Optimized())
 register(CMP_Rangaraju_Serial())
 register(CMP_Phaneendra_Prefix())
+register(CMP_Zhou_ZRQC())

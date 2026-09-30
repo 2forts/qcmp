@@ -119,6 +119,11 @@ def test_phaneendra_prefix_truth_tables():
         for a in range(2 ** n):
             for b in range(2 ** n):
                 rr = run('cmp_phaneendra_prefix', n=n, A=a, B=b, shots=1, seed=1)
+def test_zhou_zrqc_truth_tables():
+    for n in range(1, 4):
+        for a in range(2 ** n):
+            for b in range(2 ** n):
+                rr = run('cmp_zhou_zrqc', n=n, A=a, B=b, shots=1, seed=1)
                 assert rr.decoded == {
                     'gt': int(a > b),
                     'lt': int(a < b),
