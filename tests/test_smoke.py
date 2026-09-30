@@ -61,3 +61,16 @@ def test_maity_qcc_truth_table():
                 'eq': int(a == b),
                 'gt': int(a > b),
             }
+def test_barui_threshold_truth_tables():
+    for n in range(1, 5):
+        for intensity in range(2 ** n):
+            for threshold in range(2 ** n):
+                rr = run(
+                    'gt_barui_threshold',
+                    n=n,
+                    A=intensity,
+                    B=threshold,
+                    shots=128,
+                    seed=1,
+                )
+                assert rr.decoded == {'gt': int(intensity > threshold)}
