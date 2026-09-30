@@ -374,6 +374,7 @@ The repository is organized as follows:
   - `comparators/`
     - `__init__.py` — registers available comparator plugins
     - `base.py` — comparator interface (`ComparatorMeta`, `BuildOutput`)
+    - `cmp_al_rabadi.py` — Al-Rabadi (2009) iterative comparator
     - `cmp_oliveira_qbsc.py` — Oliveira and Ramos (2007) full bit-string comparator
     - `lt_orts_tand.py` — Orts et al. (2021) LT comparator (temporary logical-AND based)
     - `lt_xia_cgc` — Xia et al. (2018) LT comparator (CGC gate based)
@@ -389,6 +390,11 @@ This structure allows new comparators and metrics to be added with minimal chang
 ---
 
 ## Implemented Comparator
+
+cmp_al_rabadi:
+Al-Rabadi, A. N. (2009).
+Closed-System Quantum Logic Network Implementation of the Viterbi Algorithm.
+Facta Universitatis, Series: Electronics and Energetics, 22(1), 1-33.
 
 lt_orts_tand: 
 Orts, F., Ortega, G., Cucura, A. C., Filatovas, E., & Garzón, E. M. (2021). 

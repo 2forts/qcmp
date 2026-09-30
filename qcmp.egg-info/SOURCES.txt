@@ -16,6 +16,8 @@ qcmp/comparators/__init__.py
 qcmp/comparators/base.py
 qcmp/comparators/cmp_ganapathy_toffoli_adapted.py
 qcmp/comparators/cmp_kumar_tree_adapted.py
+qcmp/comparators/cmp_al_rabadi.py
+qcmp/comparators/cmp_al_rabadi_old.py
 qcmp/comparators/cmp_oliveira_qbsc.py
 qcmp/comparators/gt_donaire_constant_tand.py
 qcmp/comparators/gt_orts_constant_toffoli.py

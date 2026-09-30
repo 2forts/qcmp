@@ -12,6 +12,7 @@ from qcmp.comparators.lt_orts_constant_tand import LT_Orts_Constant_TAND
 from qcmp.comparators.gt_orts_constant_toffoli import GT_Orts_Constant_Toffoli
 from qcmp.comparators.gt_donaire_constant_tand import GT_Donaire_Constant_TAND
 from qcmp.comparators.lt_berti_qpc import LT_Berti_QPC
+from qcmp.comparators.cmp_al_rabadi import CMP_Al_Rabadi
 
 register(LT_Orts_TemporaryAND())
 register(LT_Yuan_QFT())
@@ -25,3 +26,4 @@ register(LT_Orts_Constant_TAND())
 register(GT_Orts_Constant_Toffoli())
 register(GT_Donaire_Constant_TAND())
 register(LT_Berti_QPC())
+register(CMP_Al_Rabadi())
