@@ -153,3 +153,12 @@ def test_xia_optimized_truth_tables():
             'lt': int(a < b),
             'eq': int(a == b),
         }
+def test_nagamani_multistage_truth_table():
+    for a in range(16):
+        for b in range(16):
+            rr = run('cmp_nagamani_multistage', n=4, A=a, B=b, shots=1, seed=1)
+            assert rr.decoded == {
+                'gt': int(a > b),
+                'lt': int(a < b),
+                'eq': int(a == b),
+            }
