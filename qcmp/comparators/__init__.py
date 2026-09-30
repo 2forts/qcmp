@@ -22,6 +22,7 @@ from qcmp.comparators.gt_du_nonzero import GT_Du_Nonzero
 from qcmp.comparators.cmp_yuan_constant_ancilla import CMP_Yuan_Constant_Ancilla
 from qcmp.comparators.cmp_subramanian_tr_half import CMP_Subramanian_TR_Half
 from qcmp.comparators.gt_xia_optimized import GT_Xia_Optimized
+from qcmp.comparators.cmp_rangaraju_serial import CMP_Rangaraju_Serial
 
 register(LT_Orts_TemporaryAND())
 register(LT_Yuan_QFT())
@@ -45,3 +46,4 @@ register(GT_Du_Nonzero())
 register(CMP_Yuan_Constant_Ancilla())
 register(CMP_Subramanian_TR_Half())
 register(GT_Xia_Optimized())
+register(CMP_Rangaraju_Serial())
