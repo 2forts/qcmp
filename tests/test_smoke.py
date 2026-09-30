@@ -61,6 +61,10 @@ def test_maity_qcc_truth_table():
     for a in range(4):
         for b in range(4):
             rr = run('cmp_maity_qcc', n=2, A=a, B=b, shots=128, seed=1)
+def test_donaire_opt1_truth_table():
+    for a in range(4):
+        for b in range(4):
+            rr = run('cmp_donaire_opt1', n=2, A=a, B=b, shots=128, seed=1)
             assert rr.decoded == {
                 'lt': int(a < b),
                 'eq': int(a == b),
@@ -162,3 +166,9 @@ def test_nagamani_multistage_truth_table():
                 'lt': int(a < b),
                 'eq': int(a == b),
             }
+
+
+def test_donaire_opt1_t_count_matches_paper():
+    qc = get('cmp_donaire_opt1').build(2).circuit
+    ops = qc.count_ops()
+    assert ops.get('t', 0) + ops.get('tdg', 0) == 24
