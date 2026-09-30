@@ -19,6 +19,7 @@ from qcmp.comparators.cmp_morrison_rc_tree import CMP_Morrison_RC_Tree
 from qcmp.comparators.gt_barui_threshold import GT_Barui_Threshold
 from qcmp.comparators.ge_caraiman_threshold_oracle import GE_Caraiman_Threshold_Oracle
 from qcmp.comparators.gt_du_nonzero import GT_Du_Nonzero
+from qcmp.comparators.cmp_yuan_constant_ancilla import CMP_Yuan_Constant_Ancilla
 
 register(LT_Orts_TemporaryAND())
 register(LT_Yuan_QFT())
@@ -39,3 +40,4 @@ register(CMP_Morrison_RC_Tree())
 register(GT_Barui_Threshold())
 register(GE_Caraiman_Threshold_Oracle())
 register(GT_Du_Nonzero())
+register(CMP_Yuan_Constant_Ancilla())
