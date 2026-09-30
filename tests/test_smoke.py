@@ -129,6 +129,11 @@ def test_sarker_npg_truth_tables():
         for a in range(2 ** n):
             for b in range(2 ** n):
                 rr = run('cmp_sarker_npg', n=n, A=a, B=b, shots=1, seed=1)
+def test_kalita_gn_truth_tables():
+    for n in range(1, 4):
+        for a in range(2 ** n):
+            for b in range(2 ** n):
+                rr = run('cmp_kalita_gn', n=n, A=a, B=b, shots=1, seed=1)
                 assert rr.decoded == {
                     'gt': int(a > b),
                     'lt': int(a < b),
