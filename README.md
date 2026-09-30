@@ -374,12 +374,8 @@ The repository is organized as follows:
   - `comparators/`
     - `__init__.py` — registers available comparator plugins
     - `base.py` — comparator interface (`ComparatorMeta`, `BuildOutput`)
-    - `cmp_al_rabadi.py` — Al-Rabadi (2009) iterative comparator
-    - `cmp_oliveira_qbsc.py` — Oliveira and Ramos (2007) full bit-string comparator
-    - `lt_orts_tand.py` — Orts et al. (2021) LT comparator (temporary logical-AND based)
-    - `lt_xia_cgc` — Xia et al. (2018) LT comparator (CGC gate based)
-    - `lt_xia_qip.py` — Xia et al. (2019) half multi-bit LT comparator
-    - `lt_yuan_qft` — Yuan et al. (2023) LT comparator (QFT-based)
+    - Active comparator modules: `cmp_al_rabadi`, `cmp_biswal_fault_tolerant`, `cmp_donaire_opt1`, `cmp_ganapathy_toffoli_adapted`, `cmp_kalita_gn`, `cmp_kumar_tree_adapted`, `cmp_lopez_prop2`, `cmp_maity_qcc`, `cmp_morrison_rc_tree`, `cmp_nagamani_multistage`, `cmp_oliveira_qbsc`, `cmp_phaneendra_prefix`, `cmp_rangaraju_serial`, `cmp_sarker_npg`, `cmp_subramanian_tr_half`, `cmp_thapliyal_tree`, `cmp_yuan_constant_ancilla`, `cmp_zhou_zrqc`, `ge_caraiman_threshold_oracle`, `gt_barui_threshold`, `gt_donaire_constant_tand`, `gt_du_nonzero`, `gt_orts_constant_toffoli`, `gt_xia_optimized`, `lt_berti_qpc`, `lt_orts_constant_tand`, `lt_orts_tand`, `lt_xia_cgc`, `lt_xia_qip`, `lt_yuan_adaptive`, and `lt_yuan_qft`.
+    - `cmp_al_rabadi_old.py` is retained as a historical implementation and is not registered.
   - `metrics/`
     - `__init__.py` — metrics registry + implementations (current repo keeps metrics here)
 - `tests/`
@@ -390,6 +386,10 @@ This structure allows new comparators and metrics to be added with minimal chang
 ---
 
 ## Implemented Comparator
+
+The following 31 comparator plugins are registered and available through the CLI:
+
+`cmp_al_rabadi`, `cmp_biswal_fault_tolerant`, `cmp_donaire_opt1`, `cmp_ganapathy_toffoli_adapted`, `cmp_kalita_gn`, `cmp_kumar_tree_adapted`, `cmp_lopez_prop2`, `cmp_maity_qcc`, `cmp_morrison_rc_tree`, `cmp_nagamani_multistage`, `cmp_oliveira_qbsc`, `cmp_phaneendra_prefix`, `cmp_rangaraju_serial`, `cmp_sarker_npg`, `cmp_subramanian_tr_half`, `cmp_thapliyal_tree`, `cmp_yuan_constant_ancilla`, `cmp_zhou_zrqc`, `ge_caraiman_threshold_oracle`, `gt_barui_threshold`, `gt_donaire_constant_tand`, `gt_du_nonzero`, `gt_orts_constant_toffoli`, `gt_xia_optimized`, `lt_berti_qpc`, `lt_orts_constant_tand`, `lt_orts_tand`, `lt_xia_cgc`, `lt_xia_qip`, `lt_yuan_adaptive`, and `lt_yuan_qft`.
 
 cmp_al_rabadi:
 Al-Rabadi, A. N. (2009).
