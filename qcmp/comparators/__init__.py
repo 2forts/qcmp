@@ -20,6 +20,7 @@ from qcmp.comparators.gt_barui_threshold import GT_Barui_Threshold
 from qcmp.comparators.ge_caraiman_threshold_oracle import GE_Caraiman_Threshold_Oracle
 from qcmp.comparators.gt_du_nonzero import GT_Du_Nonzero
 from qcmp.comparators.cmp_yuan_constant_ancilla import CMP_Yuan_Constant_Ancilla
+from qcmp.comparators.cmp_subramanian_tr_half import CMP_Subramanian_TR_Half
 
 register(LT_Orts_TemporaryAND())
 register(LT_Yuan_QFT())
@@ -41,3 +42,4 @@ register(GT_Barui_Threshold())
 register(GE_Caraiman_Threshold_Oracle())
 register(GT_Du_Nonzero())
 register(CMP_Yuan_Constant_Ancilla())
+register(CMP_Subramanian_TR_Half())
