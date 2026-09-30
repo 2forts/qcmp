@@ -152,6 +152,9 @@ def test_xia_optimized_truth_tables():
 
     for a, b in ((0, 0), (0, 15), (15, 0), (15, 15), (8, 7), (7, 8)):
         rr = run('cmp_phaneendra_prefix', n=4, A=a, B=b, shots=1, seed=1)
+def test_biswal_fault_tolerant_truth_table():
+    for a, b in ((0, 0), (0, 15), (15, 0), (15, 15), (8, 7), (7, 8)):
+        rr = run('cmp_biswal_fault_tolerant', n=4, A=a, B=b, shots=1, seed=1)
         assert rr.decoded == {
             'gt': int(a > b),
             'lt': int(a < b),
