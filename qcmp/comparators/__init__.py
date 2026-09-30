@@ -1,5 +1,4 @@
 from qcmp.registry import register
-
 from qcmp.comparators.lt_orts_tand import LT_Orts_TemporaryAND
 from qcmp.comparators.lt_yuan_qft import LT_Yuan_QFT
 from qcmp.comparators.lt_xia_cgc import LT_XIA_CGC
@@ -31,7 +30,6 @@ from qcmp.comparators.cmp_nagamani_multistage import CMP_Nagamani_Multistage
 from qcmp.comparators.cmp_donaire_opt1 import CMP_Donaire_Optimised1
 from qcmp.comparators.cmp_biswal_fault_tolerant import CMP_Biswal_FaultTolerant
 from qcmp.comparators.cmp_lopez_prop2 import CMP_Lopez_Proposal2
-
 register(LT_Orts_TemporaryAND())
 register(LT_Yuan_QFT())
 register(LT_XIA_CGC())
