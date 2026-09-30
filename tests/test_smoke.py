@@ -87,3 +87,8 @@ def test_caraiman_threshold_oracle_truth_tables():
                     seed=1,
                 )
                 assert rr.decoded == {'ge': int(color >= threshold)}
+def test_du_nonzero_checker_truth_tables():
+    for n in range(1, 5):
+        for pixel in range(2 ** n):
+            rr = run('gt_du_nonzero', n=n, A=pixel, B=0, shots=128, seed=1)
+            assert rr.decoded == {'gt': int(pixel > 0)}
