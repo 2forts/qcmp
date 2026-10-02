@@ -374,7 +374,7 @@ The repository is organized as follows:
   - `comparators/`
     - `__init__.py` — registers available comparator plugins
     - `base.py` — comparator interface (`ComparatorMeta`, `BuildOutput`)
-    - Active comparator modules: `cmp_al_rabadi`, `cmp_biswal_fault_tolerant`, `cmp_donaire_opt1`, `cmp_ganapathy_toffoli_adapted`, `cmp_kalita_gn`, `cmp_kumar_tree_adapted`, `cmp_lopez_prop2`, `cmp_maity_qcc`, `cmp_morrison_rc_tree`, `cmp_nagamani_multistage`, `cmp_oliveira_qbsc`, `cmp_phaneendra_prefix`, `cmp_rangaraju_serial`, `cmp_sarker_npg`, `cmp_subramanian_tr_half`, `cmp_thapliyal_tree`, `cmp_yuan_constant_ancilla`, `cmp_zhou_zrqc`, `ge_caraiman_threshold_oracle`, `gt_barui_threshold`, `gt_donaire_constant_tand`, `gt_du_nonzero`, `gt_orts_constant_toffoli`, `gt_xia_optimized`, `lt_berti_qpc`, `lt_orts_constant_tand`, `lt_orts_tand`, `lt_xia_cgc`, `lt_xia_qip`, `lt_yuan_adaptive`, and `lt_yuan_qft`.
+    - Comparator modules — see [Implemented comparators and article references](#implemented-comparators-and-article-references) for all 31 active plugins and their source articles.
     - `cmp_al_rabadi_old.py` is retained as a historical implementation and is not registered.
   - `metrics/`
     - `__init__.py` — metrics registry + implementations (current repo keeps metrics here)
@@ -385,76 +385,197 @@ This structure allows new comparators and metrics to be added with minimal chang
 
 ---
 
-## Implemented Comparator
+## Implemented comparators and article references
 
-The following 31 comparator plugins are registered and available through the CLI:
+All 31 registered comparators are listed below in alphabetical order. Each entry associates the CLI key with its source article and identifies the implemented circuit or variant. The implementation descriptions follow the metadata in `qcmp/comparators/`; consult each module's notes before comparing its resource equations with the paper, especially for adapted circuits.
 
-`cmp_al_rabadi`, `cmp_biswal_fault_tolerant`, `cmp_donaire_opt1`, `cmp_ganapathy_toffoli_adapted`, `cmp_kalita_gn`, `cmp_kumar_tree_adapted`, `cmp_lopez_prop2`, `cmp_maity_qcc`, `cmp_morrison_rc_tree`, `cmp_nagamani_multistage`, `cmp_oliveira_qbsc`, `cmp_phaneendra_prefix`, `cmp_rangaraju_serial`, `cmp_sarker_npg`, `cmp_subramanian_tr_half`, `cmp_thapliyal_tree`, `cmp_yuan_constant_ancilla`, `cmp_zhou_zrqc`, `ge_caraiman_threshold_oracle`, `gt_barui_threshold`, `gt_donaire_constant_tand`, `gt_du_nonzero`, `gt_orts_constant_toffoli`, `gt_xia_optimized`, `lt_berti_qpc`, `lt_orts_constant_tand`, `lt_orts_tand`, `lt_xia_cgc`, `lt_xia_qip`, `lt_yuan_adaptive`, and `lt_yuan_qft`.
+### `cmp_al_rabadi`
 
-cmp_al_rabadi:
-Al-Rabadi, A. N. (2009).
-Closed-System Quantum Logic Network Implementation of the Viterbi Algorithm.
-Facta Universitatis, Series: Electronics and Energetics, 22(1), 1-33.
+Al-Rabadi, A. N. (2009). **Closed-System Quantum Logic Network Implementation of the Viterbi Algorithm.** *Facta Universitatis, Series: Electronics and Energetics*, 22(1), 1–33. [DOI](https://doi.org/10.2298/FUEE0901001A).
 
-lt_orts_tand: 
-Orts, F., Ortega, G., Cucura, A. C., Filatovas, E., & Garzón, E. M. (2021). 
-Optimal fault-tolerant quantum comparators for image binarization. 
-The Journal of Supercomputing, 77(8), 8433-8444.
+Circuit: iterative comparator from Figures 14(a) and 14(b).
 
-lt_orts_constant_tand
-Orts, F., Filatovas, E., Garzón, E. M., & Ortega, G. (2023). 
-A quantum circuit to generate random numbers within a specific interval. 
-EPJ Quantum Technology, 10(1), 17.
+### `cmp_biswal_fault_tolerant`
 
-gt_orts_constant_toffoli
-Orts, F., & Gil-Merino, R. (2025). 
-A Framework for Quantum Circuit Optimization: Comparators as a Case Study. 
-IEEE Transactions on Computers, 75(2), 706-719.
+Biswal, L., Bandyopadhyay, C., & Rahaman, H. (2019). **Fault-tolerant Quantum Implementation of 1-bit and 4-bit Comparator Circuit using Clifford+T-group.** *2019 9th International Symposium on Embedded Computing and System Design (ISED)*. IEEE.
 
-gt_donaire_constant_tand
-Donaire, L. M., Ortega, G., Garzón, E. M., Orts, F., Paulavičius, R., & Filatovas, E. (2024, September). 
-Halving the Number of Qubits of Quantum Comparators. 
-In International Conference on Parallel Processing and Applied Mathematics (pp. 290-300).
+Circuit: fixed 4-bit comparison structure from Figure 5. The implementation reproduces the Boolean reversible layer, not the paper's complete optimized Clifford+T decomposition.
 
-cmp_ganapathy_toffoli_adapted
-Ganapathy, V., Sasikumar, S., Mariselvam, A. K., & VM, S. K. (2025). 
-Design and Analysis of Quantum Comparator Circuits for Constrained Optimization Problem.
-Preprint (10.21203/rs.3.rs-7733902/v1)
+### `cmp_donaire_opt1`
 
-cmp_kumar_tree_adapted:
-Kumar, A. S., Ramya, A., Siddhesh, U., Meera, N. Y., Kandimalla, T., & Abhishek, P. (2024, August). 
-A Comparator Tree Design with Optimized Quantum Cost Using Reversible Logic Techniques. 
-In 2024 International Conference on Intelligent Algorithms for Computational Intelligence Systems (IACIS) (pp. 1-6). IEEE.
+Donaire, L. M., Ortega, G., Garzón, E. M., & Orts, F. (2024). **Lowering the cost of quantum comparator circuits.** *The Journal of Supercomputing*, 80, 13900–13917. [DOI](https://doi.org/10.1007/s11227-024-05959-4).
 
-cmp_oliveira_qbsc:
-Oliveira, D. S., & Ramos, R. V. (2007).
-Quantum bit string comparator: circuits and applications.
-Quantum Computers and Computing, 7(1), 17-26.
+Circuit: 2-bit optimized proposed circuit 1, Figure 7.
 
-lt_xia_cgc: 
-Xia, H., Li, H., Zhang, H., Liang, Y., & Xin, J. (2018). 
-An efficient design of reversible multi-bit quantum comparator via only a single ancillary bit. 
-International Journal of Theoretical Physics, 57(12), 3727-3744.
+### `cmp_ganapathy_toffoli_adapted`
 
-lt_xia_qip:
-Xia, H., Li, H., Zhang, H., Liang, Y., & Xin, J. (2019).
-Novel multi-bit quantum comparators and their application in image binarization.
-Quantum Information Processing, 18, 229.
+Ganapathy, V., Sasikumar, S., Mariselvam, A. K., & VM, S. K. (2025). **Design and Analysis of Quantum Comparator Circuits for Constrained Optimization Problem.** Preprint, Research Square. [DOI](https://doi.org/10.21203/rs.3.rs-7733902/v1).
 
-lt_yuan_adaptive: 
-Yuan, S., Zhao, W., Gao, S., Xia, S., Hang, B., & Qu, H. (2022). 
-An adaptive threshold-based quantum image segmentation algorithm and its simulation: S. Yuan et al. 
-Quantum Information Processing, 21(10), 359.
+Circuit: one-bit Toffoli comparator from Section 2.1 and an adapted multi-bit prefix construction based on Figure 3. The multi-bit synthesis and work-qubit cleanup are implementation adaptations; their resource costs are not the paper's published costs.
 
-lt_yuan_qft: 
-Yuan, Y., Wang, C., Wang, B., Chen, Z. Y., Dou, M. H., Wu, Y. C., & Guo, G. P. (2023). 
-An improved QFT-based quantum comparator and extended modular arithmetic using one ancilla qubit. 
-New Journal of Physics, 25(10), 103011.
+### `cmp_kalita_gn`
 
-lt_berti_qpc
-Berti, A., Poggiali, A. (2026)
-A Quantum Phase-based Comparator
-Preprint (arXiv:2609.25262)
+Kalita, G., & Saikia, N. (2015). **Reversible Comparator Circuit Using a New Reversible Gate.** *Proceedings of the Sixth International Conference on Computer and Communication Technology 2015 (ICCCT '15)*.
+
+Circuit: cascading comparator using the GN gate, Figures 5 and 6.
+
+### `cmp_kumar_tree_adapted`
+
+Kumar, A. S., Ramya, A., Siddhesh, U., Meera, N. Y., Kandimalla, T., & Abhishek, P. (2024). **A Comparator Tree Design with Optimized Quantum Cost Using Reversible Logic Techniques.** *2024 International Conference on Intelligent Algorithms for Computational Intelligence Systems (IACIS)*, 1–6. IEEE. [DOI](https://doi.org/10.1109/IACIS61494.2024.10721638).
+
+Circuit: adapted comparator tree using the gate equations from Figures 1–3. The implementation rewires the TR3 and output stages; it is not a literal reproduction of Figures 4–5, and its resource equations describe this adaptation.
+
+### `cmp_lopez_prop2`
+
+Lopez, L. O., Orts, F., Ortega, G., Gonzalez-Ruiz, V., & Garzón, E. M. (2023). **Fault-tolerant quantum algorithm for dual-threshold image segmentation.** *The Journal of Supercomputing*, 79, 12549–12562. [DOI](https://doi.org/10.1007/s11227-023-05148-9).
+
+Circuit: proposed full comparator circuit 2.
+
+### `cmp_maity_qcc`
+
+Maity, H. (2022). **Design and implementation of a two-qubit quantum comparator circuit (Q-CC).** *Journal of Computational Electronics*, 21, 530–534. [DOI](https://doi.org/10.1007/s10825-022-01858-0).
+
+Circuit: 2-bit Q-CC with less-than, equality, and greater-than outputs.
+
+### `cmp_morrison_rc_tree`
+
+Morrison, M., Lewandowski, M., & Ranganathan, N. (2012). **Design of a Tree-Based Comparator and Memory Unit Based on a Novel Reversible Logic Structure.** *2012 IEEE Computer Society Annual Symposium on VLSI (ISVLSI)*.
+
+Circuit: comparator using the paper's RC relation logic and tree construction.
+
+### `cmp_nagamani_multistage`
+
+Nagamani, A. N., Rengarajan, D., & Agrawal, V. K. (2016). **An Optimized Design of Reversible Magnitude and Signed Comparators.** *2016 IEEE International Conference on Electron Devices and Solid-State Circuits (EDSSC)*.
+
+Circuit: unsigned multi-stage magnitude comparator, with two-bit first-stage blocks and a priority-encoding second stage. The gate synthesis differs from the paper's exact reversible-gate realization.
+
+### `cmp_oliveira_qbsc`
+
+Oliveira, D. S., & Ramos, R. V. (2007). **Quantum bit string comparator: circuits and applications.** *Quantum Computers and Computing*, 7(1), 17–26.
+
+Circuit: full bit-string comparator (QBSC) built from U_c blocks.
+
+### `cmp_phaneendra_prefix`
+
+Phaneendra, S. P., Vudadha, C., Sreehari, V., & Srinivas, M. B. (2014). **An Optimized Design of Reversible Quantum Comparator.** *2014 27th International Conference on VLSI Design and 2014 13th International Conference on Embedded Systems*, 557–562. IEEE.
+
+Circuit: three-stage prefix comparator with local relation generation, prefix grouping, and final less-than output.
+
+### `cmp_rangaraju_serial`
+
+Rangaraju, H. G., Hegde, V., Raja, K. B., & Muralidhara, K. N. (2012). **Design of Efficient Reversible Binary Comparator.** *Procedia Engineering*, 30, 897–904.
+
+Circuit: serial input circuit followed by one-bit comparator cells, Figures 4–11.
+
+### `cmp_sarker_npg`
+
+Sarker, A., Amin, M. S., Bose, A., & Islam, N. (2014). **An Optimized Design of Binary Comparator Circuit in Quantum Computing.** *2014 International Conference on Informatics, Electronics & Vision (ICIEV)*. IEEE.
+
+Circuit: NPG comparator cell from Figure 7 and the propagator recurrence from Figures 8–10.
+
+### `cmp_subramanian_tr_half`
+
+Saravanan, S., Vennila, I., & Mohanram, S. (2016). **Design and Implementation of an Efficient Reversible Comparator Using TR Gate.** *Circuits and Systems*, 7, 2578–2592. [DOI](https://doi.org/10.4236/cs.2016.79223).
+
+Circuit: half-subtraction comparator using TR gates. The internal key retains “subramanian”, while the article's citation uses the first author's bibliographic name, Saravanan.
+
+### `cmp_thapliyal_tree`
+
+Thapliyal, H., Ranganathan, N., & Ferreira, R. (2010). **Design of a Comparator Tree Based on Reversible Logic.** *2010 10th IEEE Conference on Nanotechnology (NANO)*, 1113–1116. [DOI](https://doi.org/10.1109/NANO.2010.5697872).
+
+Circuit: binary comparator tree with two-bit leaf nodes. The bibliographic year is 2010; the module metadata currently labels it 2009.
+
+### `cmp_yuan_constant_ancilla`
+
+Yuan, S., Wen, C., Hang, B., & Gong, Y. (2020). **The dual-threshold quantum image segmentation algorithm and its simulation.** *Quantum Information Processing*, 19, 425. [DOI](https://doi.org/10.1007/s11128-020-02932-x).
+
+Circuit: three-way comparator with five auxiliary qubits, Figure 9.
+
+### `cmp_zhou_zrqc`
+
+Zhou, R.-G., Zhang, M.-Q., Wu, Q., & Li, Y.-C. (2013). **Optimization Approaches for Designing a Novel 4-Bit Reversible Comparator.** *International Journal of Theoretical Physics*, 52, 559–575. [DOI](https://doi.org/10.1007/s10773-012-1360-y).
+
+Circuit: scalable ZRQC1 cascade and prefix products, Figures 13, 14, and 18.
+
+### `ge_caraiman_threshold_oracle`
+
+Caraiman, S., & Manta, V. I. (2015). **Image segmentation on a quantum computer.** *Quantum Information Processing*, 14, 1693–1715.
+
+Circuit: threshold oracle from Figure 5(b), using the QBSC construction. In qcmp, A is the threshold and B is the pixel intensity; the output indicates B >= A.
+
+### `gt_barui_threshold`
+
+Barui, A., Pal, M., & Panigrahi, P. K. (2024). **A novel approach to threshold quantum images by using unsharp measurements.** *Quantum Information Processing*, 23, 76. [Preprint](https://arxiv.org/abs/2310.10753).
+
+Circuit: intensity-versus-threshold comparator from Figure 8.
+
+### `gt_donaire_constant_tand`
+
+Donaire, L. M., Ortega, G., Garzón, E. M., Orts, F., Paulavičius, R., & Filatovas, E. (2025). **Halving the Number of Qubits of Quantum Comparators.** *Parallel Processing and Applied Mathematics (PPAM 2024)*, Lecture Notes in Computer Science, 15580, 290–300. [DOI](https://doi.org/10.1007/978-3-031-85700-3_21).
+
+Circuit: constant-A comparator using temporary logical-AND gates and N+2 qubits. The conference was held in 2024; the proceedings were published in 2025.
+
+### `gt_du_nonzero`
+
+Du, S., Luo, K., Zhi, Y., Situ, H., & Zhang, J. (2022). **Binarization of grayscale quantum image denoted with novel enhanced quantum representations.** *Results in Physics*, 39, 105710. [DOI](https://doi.org/10.1016/j.rinp.2022.105710).
+
+Circuit: nonzero pixel-state checker U1/Qf, Figures 2–4; it tests A > 0 with a fixed zero threshold.
+
+### `gt_orts_constant_toffoli`
+
+Orts, F., & Gil-Merino, R. (2026). **A Framework for Quantum Circuit Optimization: Comparators as a Case Study.** *IEEE Transactions on Computers*, 75(2), 706–719. [DOI](https://doi.org/10.1109/TC.2025.3642981).
+
+Circuit: constant-A Toffoli comparator from Section IV-B and Figures 4–6. The journal issue is dated 2026; its early-access DOI is dated 2025.
+
+### `gt_xia_optimized`
+
+Xia, H.-Y., Zhang, H., Song, S.-X., Li, H., Zhou, Y.-J., & Chen, X. (2020). **Design and simulation of quantum image binarization using quantum comparator.** *Modern Physics Letters A*, 35, 2050049. [DOI](https://doi.org/10.1142/S0217732320500492).
+
+Circuit: optimized ripple comparator from Figures 8–11. The volume is dated 2020; the module name currently cites the 2019 online-publication year.
+
+### `lt_berti_qpc`
+
+Berti, A., & Poggiali, A. (2026). **A Quantum Phase-based Comparator.** Preprint, arXiv:2609.25262v1 [quant-ph]. [arXiv](https://arxiv.org/abs/2609.25262v1).
+
+Circuit: register-driven phase comparator, Figure 2, with a statistical readout.
+
+### `lt_orts_constant_tand`
+
+Orts, F., Filatovas, E., Garzón, E. M., & Ortega, G. (2023). **A quantum circuit to generate random numbers within a specific interval.** *EPJ Quantum Technology*, 10, 17. [DOI](https://doi.org/10.1140/epjqt/s40507-023-00174-1).
+
+Circuit: constant-B comparator using temporary logical-AND gates; qcmp decodes its result as A < B.
+
+### `lt_orts_tand`
+
+Orts, F., Ortega, G., Cucura, A. C., Filatovas, E., & Garzón, E. M. (2021). **Optimal fault-tolerant quantum comparators for image binarization.** *The Journal of Supercomputing*, 77(8), 8433–8444.
+
+Circuit: first proposed half comparator, Figure 4, using the temporary logical-AND gate from Figure 3.
+
+### `lt_xia_cgc`
+
+Xia, H., Li, H., Zhang, H., Liang, Y., & Xin, J. (2018). **An efficient design of reversible multi-bit quantum comparator via only a single ancillary bit.** *International Journal of Theoretical Physics*, 57(12), 3727–3744.
+
+Circuit: ripple-carry comparator using CGC/ICGC gates, Section 3.2 and Figure 11.
+
+### `lt_xia_qip`
+
+Xia, H., Li, H., Zhang, H., Liang, Y., & Xin, J. (2019). **Novel multi-bit quantum comparators and their application in image binarization.** *Quantum Information Processing*, 18, 229.
+
+Circuit: half multi-bit less-than comparator with one auxiliary qubit and one output qubit.
+
+### `lt_yuan_adaptive`
+
+Yuan, S., Zhao, W., Gao, S., Xia, S., Hang, B., & Qu, H. (2022). **An adaptive threshold-based quantum image segmentation algorithm and its simulation.** *Quantum Information Processing*, 21(10), 359. [DOI](https://doi.org/10.1007/s11128-022-03709-0).
+
+Circuit: two-bit comparator from Figure 4, with a documented ripple extension for larger widths.
+
+### `lt_yuan_qft`
+
+Yuan, Y., Wang, C., Wang, B., Chen, Z. Y., Dou, M. H., Wu, Y. C., & Guo, G. P. (2023). **An improved QFT-based quantum comparator and extended modular arithmetic using one ancilla qubit.** *New Journal of Physics*, 25(10), 103011.
+
+Circuit: quantum-states comparator from Appendix A, Figure 10.
+
+`cmp_al_rabadi_old.py` is retained only as a historical implementation of the Al-Rabadi article above. It is not an additional registered comparator.
 
 ## 📄 License
 
