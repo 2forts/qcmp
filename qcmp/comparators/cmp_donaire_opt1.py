@@ -3,7 +3,7 @@ from __future__ import annotations
 from qiskit import ClassicalRegister, QuantumCircuit, QuantumRegister
 from qiskit.result import marginal_counts
 
-from qcmp.comparators.base import BuildOutput, ComparatorMeta
+from qcmp.comparators.base import BuildOutput, ComparatorMeta, ResourceLayout
 
 
 def prepare_t_state(qc: QuantumCircuit, qubit) -> None:
@@ -148,4 +148,13 @@ class CMP_Donaire_Optimised1:
             "c_out": c_out,
         }
 
-        return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
+        return BuildOutput(
+            circuit=qc,
+            regs=regs,
+            decode_counts=decode_counts,
+            resources=ResourceLayout(
+                operand_registers=("a", "b"),
+                solution_qubits=(out[0], out[1]),
+                restored_zero_qubits=(),
+            ),
+        )
