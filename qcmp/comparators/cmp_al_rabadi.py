@@ -3,7 +3,7 @@ from __future__ import annotations
 from qiskit import ClassicalRegister, QuantumCircuit, QuantumRegister
 from qiskit.result import marginal_counts
 
-from qcmp.comparators.base import BuildOutput, ComparatorMeta
+from qcmp.comparators.base import BuildOutput, ComparatorMeta, ResourceLayout
 
 
 def _al_rabadi_cell_fig14a(
@@ -239,4 +239,13 @@ class CMP_Al_Rabadi:
             "c_out": c_out,
         }
 
-        return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
+        return BuildOutput(
+            circuit=qc,
+            regs=regs,
+            decode_counts=decode_counts,
+            resources=ResourceLayout(
+                operand_registers=("a", "b"),
+                solution_qubits=(a_state[n], eq[0], b_state[n]),
+                restored_zero_qubits=(),
+            ),
+        )
