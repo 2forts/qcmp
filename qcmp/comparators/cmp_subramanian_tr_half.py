@@ -3,8 +3,11 @@ from __future__ import annotations
 from qiskit import ClassicalRegister, QuantumCircuit, QuantumRegister
 from qiskit.result import marginal_counts
 
-from qcmp.comparators.base import BuildOutput, ComparatorMeta
-
+from qcmp.comparators.base import (
+    BuildOutput,
+    ComparatorMeta,
+    ResourceLayout,
+)
 
 def _open_mcx(qc: QuantumCircuit, controls, target, open_indexes: set[int]) -> None:
     """Apply a multi-controlled X with selected open controls."""
@@ -130,4 +133,15 @@ class CMP_Subramanian_TR_Half:
             "c_out": c_out,
         }
 
-        return BuildOutput(circuit=qc, regs=regs, decode_counts=decode_counts)
+        resources = ResourceLayout(
+            operand_registers=("a", "b"),
+            solution_qubits=(out[0], out[1], out[2]),
+            restored_zero_qubits=(lt_state[0], gt_state[0]),
+        )
+
+        return BuildOutput(
+            circuit=qc,
+            regs=regs,
+            decode_counts=decode_counts,
+            resources=resources,
+        )
