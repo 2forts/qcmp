@@ -28,6 +28,8 @@ from qcmp.comparators.cmp_sarker_npg import CMP_Sarker_NPG
 from qcmp.comparators.cmp_kalita_gn import CMP_Kalita_GN
 from qcmp.comparators.cmp_nagamani_multistage import CMP_Nagamani_Multistage
 from qcmp.comparators.cmp_donaire_opt1 import CMP_Donaire_Optimised1
+from qcmp.comparators.cmp_donaire_opt2_adapted import CMP_Donaire_Optimised2_Adapted
+from qcmp.comparators.cmp_donaire_opt3 import CMP_Donaire_Optimised3
 from qcmp.comparators.cmp_biswal_fault_tolerant import CMP_Biswal_FaultTolerant
 from qcmp.comparators.cmp_lopez_prop2 import CMP_Lopez_Proposal2
 register(LT_Orts_TemporaryAND())
@@ -59,5 +61,7 @@ register(CMP_Sarker_NPG())
 register(CMP_Kalita_GN())
 register(CMP_Nagamani_Multistage())
 register(CMP_Donaire_Optimised1())
+register(CMP_Donaire_Optimised2_Adapted())
+register(CMP_Donaire_Optimised3())
 register(CMP_Biswal_FaultTolerant())
 register(CMP_Lopez_Proposal2())
